@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=ud*0_+&e13-yt_yu)(ba1wr2m()&03$79dopzfo*#ck#y2z1m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://solar-quotation-1.onrender.com']
 
 # Application definition
 
@@ -49,7 +49,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'solar_crm.urls'
 
@@ -67,7 +70,11 @@ TEMPLATES = [
         },
     },
 ]
+import dj_database_url
 
+DATABASES = {
+    'default': dj_database_url.config(default='postgresql://bjarang_solars_user:Sr7FSFrY1Adt4GtRTKtnT8FpuNm7Gch5@dpg-d70h1mua2pns73b51510-a/bjarang_solars')
+}
 WSGI_APPLICATION = 'solar_crm.wsgi.application'
 
 
